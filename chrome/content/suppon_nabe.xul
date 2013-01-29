@@ -9,7 +9,7 @@
   href="chrome://suppon_nabe/content/suppon_nabe.css"?>
 <overlay id="sn_overlay" 
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script src="http://code.jquery.com/jquery-latest.js" />
+  <script src="jquery.js" />
   <script type="application/javascript" 
     src="chrome://suppon_nabe/content/suppon_nabe.js" />
   <toolbar id="nav-bar">
