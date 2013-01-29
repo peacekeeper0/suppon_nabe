@@ -1,0 +1,3 @@
+content	suppon_nabe	chrome/content/
+overlay	chrome://browser/content/browser.xul	chrome://suppon_nabe/content/suppon_nabe.xul
+style	chrome://global/content/customizeToolbar.xul	chrome://suppon_nabe/content/suppon_nabe.css

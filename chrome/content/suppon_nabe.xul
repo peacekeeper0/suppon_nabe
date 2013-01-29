@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2013 Bonnie Leach
+     Licensed under the MIT License.
+     http://www.opensource.org/licenses/mit-license.php 
+
+     Overlay to include icon on navigation toolbar. -->
+
+<?xml-stylesheet type="text/css"
+  href="chrome://suppon_nabe/content/suppon_nabe.css"?>
+<overlay id="sn_overlay" 
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="http://code.jquery.com/jquery-latest.js" />
+  <script type="application/javascript" 
+    src="chrome://suppon_nabe/content/suppon_nabe.js" />
+  <toolbar id="nav-bar">
+    <toolbarbutton id="sn_button" tooltiptext="init" 
+      oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');" />
+  </toolbar>
+</overlay>

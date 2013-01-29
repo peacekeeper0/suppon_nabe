@@ -1,0 +1,21 @@
+/* Copyright (c) 2013 Bonnie Leach
+ * Licensed under the MIT License.
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ * Simply sets the image for each icon class.
+ */
+.bad_button {
+  list-style-image: url("chrome://suppon_nabe/content/bad.png");
+}
+
+.review_button {
+  list-style-image: url("chrome://suppon_nabe/content/rvw.png");
+}
+
+.lesson_button {
+  list-style-image: url("chrome://suppon_nabe/content/lsn.png");
+}
+
+.relax_button {
+  list-style-image: url("chrome://suppon_nabe/content/rlx.png");
+}

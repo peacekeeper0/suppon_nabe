@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!-- Copyright (c) 2013 Bonnie Leach
+     Licensed under the MIT License.
+     http://www.opensource.org/licenses/mit-license.php 
+
+     Setting up the preferences window and binding them. -->
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<prefwindow id="suppon_nabe-prefs"
+  title="Suppon Nabe Preferences"
+  xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <prefpane id="sn-pref-pane" label = "WaniKani Settings">
+    <preferences>
+      <preference id="pref_api_key" name="extensions.suppon_nabe.api_key" 
+        type="string" />
+      <preference id="pref_check_min" name="extensions.suppon_nabe.check_min"
+        type="int" />
+    </preferences>
+    <hbox align="center">
+      <label control="key" value="API Key: "/>
+      <textbox preference="pref_api_key" maxlength="32" />
+    </hbox>
+    <hbox align="center">
+      <label control="refresh" value="Refresh rate (minutes): " />
+      <textbox preference="pref_check_min" min="1" max="120" type="number" />
+    </hbox>
+  </prefpane>
+</prefwindow>
