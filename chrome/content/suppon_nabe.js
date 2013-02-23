@@ -2,6 +2,10 @@
  * Licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license.php
  *
+ * v0.1.1 - 20/02/13
+ * Cleaning up some of the code so it isn't repeated so much.
+ * Made the icon appear in the customization toolbar.
+ *
  * v0.1 - 28/01/13
  * Suppon Nabe is a Firefox Extension for use with WaniKani.com.
  * It queries the site's API for when the user's next review is and 
@@ -102,24 +106,22 @@ var Suppon_Nabe = {
           sender.state = data.error.message;
           sender.button.tooltipText = sender.state;
         } else {
+          // Unless we are waiting for the next review, the next interval
+          // will be equal to the one set by the user.
+          var next_interval = sender.check_min;
+
           if (data.requested_information.reviews_available > 0) {
             // If there are reviews available, change as much and start
             // the timer based on the user's set interval.
             sender.state = "Reviews available!";
             sender.button.tooltipText = sender.state;
             sender.button.className = "review_button";
-            sender.timer = window.setTimeout(
-              function() {sender.update_review_time(sender);}, 
-              sender.check_min);
           } else if (data.requested_information.lessons_available > 0) {
             // If there are lessons available, change as much and start
             // the timer based on the user's set interval.
             sender.state = "Lessons available!";
             sender.button.tooltipText = sender.state;
             sender.button.className = "lesson_button";
-            sender.timer = window.setTimeout(
-              function() {sender.update_review_time(sender);},
-              sender.check_min);
           } else {
             // If there are no reviews or lessons, go into relax mode.
             // Get the date from the request and start a timer to end
@@ -131,11 +133,14 @@ var Suppon_Nabe = {
               date.toLocaleTimeString() + " " + date.toLocaleDateString();
             sender.button.tooltipText = sender.state;
             // Set an alarm for when the next review is up (plus a second).
-            sender.timer = window.setTimeout(
-              function() {sender.update_review_time(sender);},
-              (data.requested_information.next_review_date * 1000) -
-              new Date().getTime() + 1000);
-    }}})
+            next_interval = data.requested_information.next_review_date * 
+              1000 - new Date().getTime() + 1000;
+          }
+
+          sender.timer = window.setTimeout(
+            function() { sender.update_review_time(sender); },
+            next_interval);
+    }})
     .fail(function(jqXHR, textStatus, errorThrown) { 
       // If the JSON request fails, put the error in the tooltip but
       // also the last known state. This means a person will know what

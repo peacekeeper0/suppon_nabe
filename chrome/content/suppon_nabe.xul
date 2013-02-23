@@ -9,11 +9,12 @@
   href="chrome://suppon_nabe/content/suppon_nabe.css"?>
 <overlay id="sn_overlay" 
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script src="jquery.js" />
+  <script type="application/javascript" src="chrome://suppon_nabe/content/jquery-1.9.1.min.js" />
   <script type="application/javascript" 
     src="chrome://suppon_nabe/content/suppon_nabe.js" />
-  <toolbar id="nav-bar">
-    <toolbarbutton id="sn_button" tooltiptext="init" 
+  <toolbarpalette id="BrowserToolbarPalette">
+    <toolbarbutton id="sn_button" label="Suppon Nabe" 
+      class="relax_button" tooltiptext="init" 
       oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');" />
-  </toolbar>
+  </toolbarpalette>
 </overlay>
