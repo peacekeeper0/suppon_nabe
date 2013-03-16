@@ -4,18 +4,30 @@
  *
  * Simply sets the image for each icon class.
  */
-.bad_button {
+.bad_button0 {
   list-style-image: url("chrome://suppon_nabe/content/bad.png");
 }
+.bad_button1 {
+  list-style-image: url("chrome://suppon_nabe/content/bad_sm.png");
+}
 
-.review_button {
+.review_button0 {
   list-style-image: url("chrome://suppon_nabe/content/rvw.png");
 }
-
-.lesson_button {
-  list-style-image: url("chrome://suppon_nabe/content/lsn.png");
+.review_button1 {
+  list-style-image: url("chrome://suppon_nabe/content/rvw_sm.png");
 }
 
-.relax_button {
+.lesson_button0 {
+  list-style-image: url("chrome://suppon_nabe/content/lsn.png");
+}
+.lesson_button1 {
+  list-style-image: url("chrome://suppon_nabe/content/lsn_sm.png");
+}
+
+.relax_button0 {
   list-style-image: url("chrome://suppon_nabe/content/rlx.png");
+}
+.relax_button1 {
+  list-style-image: url("chrome://suppon_nabe/content/rlx_sm.png");
 }

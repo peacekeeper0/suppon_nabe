@@ -4,8 +4,8 @@
  *
  * v0.1 - 28/01/13
  * Suppon Nabe is a Firefox Extension for use with WaniKani.com.
- * It queries the site's API for when the user's next review is and 
- * counts towards that. Once reviews or lessons are available, it 
+ * It queries the site's API for when the user's next review is and
+ * counts towards that. Once reviews or lessons are available, it
  * will check every few minutes based on the user's preferences to
  * see if they have finished their reviews. Once there are none, it
  * will wait for the next reviews to be available again.
@@ -16,10 +16,10 @@ var Suppon_Nabe = {
   prefs: null,
   api_key: null,
   check_min: null,
-  button: null,
+  button: [null, null],
   timer: null,
   state: null,
-  
+
   // Set up preference access, add an observer for preference changes.
   // If the API key looks valid, try to update the review time.
   startup: function() {
@@ -31,9 +31,10 @@ var Suppon_Nabe = {
     this.prefs.addObserver("", this, false);
 
     // Collect needed references such as the button and preferences.
-    this.button = document.getElementById("sn_button");
+    this.button[0] = document.getElementById("sn_button");
+    this.button[1] = document.getElementById("sn_button_16");
     this.check_min = this.prefs.getIntPref("check_min");
-    if (typeof this.check_min === "undefined" || this.check_min === null || 
+    if (typeof this.check_min === "undefined" || this.check_min === null ||
         this.check_min < 1) {
       this.check_min = 1;
       this.prefs.setIntPref("check_min",1);
@@ -44,11 +45,19 @@ var Suppon_Nabe = {
     // The API key is always 32 characters. If it looks like one,
     // attempt to update the icon.
     this.api_key = this.prefs.getCharPref("api_key");
-    if (this.api_key != null && this.api_key.length === 32)
+    if (this.api_key != null && this.api_key.length === 32){
       this.update_review_time(this);
-    else
-      this.button.tooltipText = 
-        "You must input your WaniKani API key.";
+    } else {
+      for (var i = 0; i < 2; i++){ //javascript really needs a sane foreach
+        this.button[i].tooltipText =
+          "You must input your WaniKani API key.";
+      }
+    }
+
+    //install a button to the navbar
+    var navbar = document.getElementById("nav-bar");
+    navbar.setAttribute("currentset", navbar.currentSet+",sn_button");
+    document.persist("nav-bar", "currentset");
   },
 
   // Watches for preference changes.
@@ -69,9 +78,11 @@ var Suppon_Nabe = {
             this.api_key.length === 32)
           this.update_review_time(this);
         else {
-          this.button.className = "bad_button";
-          this.button.tooltipText =
-            "You must input your WaniKani API key.";
+          for (var i = 0; i < 2; i++){
+            this.button[i].className = "bad_button"+i;
+            this.button[i].tooltipText =
+              "You must input your WaniKani API key.";
+          }
         }
         break;
 
@@ -95,28 +106,36 @@ var Suppon_Nabe = {
     var url = sender.api_url + sender.api_key + "/study-queue";
     $.getJSON(url, null,
       function(data) {
-        if (typeof data.error != 'undefined') { 
+        if (typeof data.error != 'undefined') {
           // If the request returns an error, display it and change
           // to the bad icon.
-          sender.button.className = "bad_button";
+          for (var i = 0; i < 2; i++){
+            sender.button[i].className = "bad_button"+i;
+          }
           sender.state = data.error.message;
-          sender.button.tooltipText = sender.state;
+          for (var i = 0; i < 2; i++){
+            sender.button[i].tooltipText = sender.state;
+          }
         } else {
           if (data.requested_information.reviews_available > 0) {
             // If there are reviews available, change as much and start
             // the timer based on the user's set interval.
             sender.state = "Reviews available!";
-            sender.button.tooltipText = sender.state;
-            sender.button.className = "review_button";
+            for (var i = 0; i < 2; i++){
+              sender.button[i].tooltipText = sender.state;
+              sender.button[i].className = "review_button"+i;
+            }
             sender.timer = window.setTimeout(
-              function() {sender.update_review_time(sender);}, 
+              function() {sender.update_review_time(sender);},
               sender.check_min);
           } else if (data.requested_information.lessons_available > 0) {
             // If there are lessons available, change as much and start
             // the timer based on the user's set interval.
             sender.state = "Lessons available!";
-            sender.button.tooltipText = sender.state;
-            sender.button.className = "lesson_button";
+            for (var i = 0; i < 2; i++){
+              sender.button[i].tooltipText = sender.state;
+              sender.button[i].className = "lesson_button"+i;
+            }
             sender.timer = window.setTimeout(
               function() {sender.update_review_time(sender);},
               sender.check_min);
@@ -124,27 +143,33 @@ var Suppon_Nabe = {
             // If there are no reviews or lessons, go into relax mode.
             // Get the date from the request and start a timer to end
             // at that time.
-            sender.button.className = "relax_button";
-            var date = 
+            for (var i = 0; i < 2; i++){
+              sender.button[i].className = "relax_button"+i;
+            }
+            var date =
               new Date(data.requested_information.next_review_date*1000);
             sender.state = "Next review: " +
               date.toLocaleTimeString() + " " + date.toLocaleDateString();
-            sender.button.tooltipText = sender.state;
+            for (var i = 0; i < 2; i++){
+              sender.button[i].tooltipText = sender.state;
+            }
             // Set an alarm for when the next review is up (plus a second).
             sender.timer = window.setTimeout(
               function() {sender.update_review_time(sender);},
               (data.requested_information.next_review_date * 1000) -
               new Date().getTime() + 1000);
     }}})
-    .fail(function(jqXHR, textStatus, errorThrown) { 
+    .fail(function(jqXHR, textStatus, errorThrown) {
       // If the JSON request fails, put the error in the tooltip but
       // also the last known state. This means a person will know what
       // the last known review time (for example) is if they get
       // disconnected or their request is denied since it is capped at
       // 100 requests per hour.
-      sender.button.tooltipText = errorThrown + 
-        "\nLast state: " + sender.state;
-      sender.button.className = "bad_button";
+      for (var i = 0; i < 2; i++){
+        sender.button[i].tooltipText = errorThrown +
+          "\nLast state: " + sender.state;
+        sender.button[i].className = "bad_button"+i;
+      }
       sender.timer = window.setTimeout(
         function() {sender.update_review_time(sender);}, sender.check_min);
   });},
@@ -159,5 +184,5 @@ var Suppon_Nabe = {
 window.addEventListener("load", function(e) { Suppon_Nabe.startup(); },
   false);
 // Run shutdown when the browser unloads.
-window.addEventListener("unload", function(e) { Suppon_Nabe.shutdown(); }, 
+window.addEventListener("unload", function(e) { Suppon_Nabe.shutdown(); },
   false);
