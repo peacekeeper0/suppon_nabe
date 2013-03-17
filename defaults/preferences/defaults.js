@@ -6,3 +6,4 @@
  */
 pref("extensions.suppon_nabe.api_key","");
 pref("extensions.suppon_nabe.check_min",1);
+pref("extensions.suppon_nabe.firstrun", true);

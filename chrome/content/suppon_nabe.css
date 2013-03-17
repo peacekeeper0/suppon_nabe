@@ -9,6 +9,7 @@
 }
 .bad_button1 {
   list-style-image: url("chrome://suppon_nabe/content/bad_sm.png");
+  -moz-appearance: none;
 }
 
 .review_button0 {
@@ -16,6 +17,7 @@
 }
 .review_button1 {
   list-style-image: url("chrome://suppon_nabe/content/rvw_sm.png");
+  -moz-appearance: none;
 }
 
 .lesson_button0 {
@@ -23,6 +25,7 @@
 }
 .lesson_button1 {
   list-style-image: url("chrome://suppon_nabe/content/lsn_sm.png");
+  -moz-appearance: none;
 }
 
 .relax_button0 {
@@ -30,4 +33,5 @@
 }
 .relax_button1 {
   list-style-image: url("chrome://suppon_nabe/content/rlx_sm.png");
+  -moz-appearance: none;
 }

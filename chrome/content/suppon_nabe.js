@@ -30,6 +30,21 @@ var Suppon_Nabe = {
     this.prefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
     this.prefs.addObserver("", this, false);
 
+    var firstrun = this.prefs.getBoolPref("firstrun");
+    if (firstrun){
+      this.prefs.setBoolPref("firstrun", false);
+      //install a button to the navbar if there isn't one
+      //this.add_button;
+      var navbar = document.getElementById("nav-bar");
+      var id = "sn_button";
+
+      navbar.insertItem(id);
+      navbar.setAttribute("currentset", navbar.currentSet);
+      document.persist(navbar.id, "currentset");
+
+      //TODO: prompt for API key
+    }
+
     // Collect needed references such as the button and preferences.
     this.button[0] = document.getElementById("sn_button");
     this.button[1] = document.getElementById("sn_button_16");
@@ -49,15 +64,11 @@ var Suppon_Nabe = {
       this.update_review_time(this);
     } else {
       for (var i = 0; i < 2; i++){ //javascript really needs a sane foreach
+        this.button[i].className = "bad_button"+i;
         this.button[i].tooltipText =
           "You must input your WaniKani API key.";
       }
     }
-
-    //install a button to the navbar
-    var navbar = document.getElementById("nav-bar");
-    navbar.setAttribute("currentset", navbar.currentSet+",sn_button");
-    document.persist("nav-bar", "currentset");
   },
 
   // Watches for preference changes.
@@ -173,6 +184,11 @@ var Suppon_Nabe = {
       sender.timer = window.setTimeout(
         function() {sender.update_review_time(sender);}, sender.check_min);
   });},
+
+  //adapted from https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar
+  // add_button: function(){
+
+  // },
 
   // Stop watching for preference changes.
   shutdown: function() {

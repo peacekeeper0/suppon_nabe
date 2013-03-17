@@ -22,6 +22,8 @@
     label="Suppon Nabe"
     oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');" 
   />
+  <!-- TODO: below should probably be type="menu" to match behaviour w/other
+	statusbar buttons -->
   <toolbarbutton id="sn_button_16" tooltiptext="You need to restart Firefox :(" 
     label="Suppon Nabe (Small)"
     oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');" 
