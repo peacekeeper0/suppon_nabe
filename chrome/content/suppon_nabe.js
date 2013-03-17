@@ -33,14 +33,9 @@ var Suppon_Nabe = {
     var firstrun = this.prefs.getBoolPref("firstrun");
     if (firstrun){
       this.prefs.setBoolPref("firstrun", false);
-      //install a button to the navbar if there isn't one
-      //this.add_button;
-      var navbar = document.getElementById("nav-bar");
-      var id = "sn_button";
 
-      navbar.insertItem(id);
-      navbar.setAttribute("currentset", navbar.currentSet);
-      document.persist(navbar.id, "currentset");
+      this.add_button("nav-bar", "sn_button");
+      this.add_button("addon-bar", "sn_button_16");
 
       //TODO: prompt for API key
     }
@@ -186,9 +181,18 @@ var Suppon_Nabe = {
   });},
 
   //adapted from https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar
-  // add_button: function(){
+  add_button: function (toolbar, button){
+      //install a button to the navbar if there isn't one
+      toolbar = document.getElementById(toolbar);
 
-  // },
+      toolbar.insertItem(button);
+      toolbar.setAttribute("currentset", toolbar.currentSet);
+      document.persist(toolbar.id, "currentset");
+
+      if (toolbar.id == "addon-bar"){
+        toolbar.collapsed = false;
+      }
+  },
 
   // Stop watching for preference changes.
   shutdown: function() {
