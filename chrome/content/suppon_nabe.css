@@ -33,5 +33,5 @@
 }
 .relax_button1 {
   list-style-image: url("chrome://suppon_nabe/content/rlx_sm.png");
-  -moz-appearance: none;
+  -moz-appearance: none; /* wrong choice, try again */
 }

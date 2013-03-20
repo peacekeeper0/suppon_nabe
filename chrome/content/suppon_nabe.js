@@ -181,9 +181,9 @@ var Suppon_Nabe = {
   });},
 
   //adapted from https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar
-  add_button: function (toolbar, button){
+  add_button: function (target, button){
       //install a button to the navbar if there isn't one
-      toolbar = document.getElementById(toolbar);
+      var toolbar = document.getElementById(target);
 
       toolbar.insertItem(button);
       toolbar.setAttribute("currentset", toolbar.currentSet);
