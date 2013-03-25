@@ -17,3 +17,17 @@ Licensed under the MIT license. See the LICENSE file for more details.
 ### 0.1 - 27/01/2013
 
 * Initial release.
+
+### v0.2p - 19/03/2013
+
+* Added small icon
+* Installs both icons to toolbars on first run
+* No longer requires a double restart to install/work
+
+####BUGs:
+
+* Sticks in init mode after a (post-firstrun) browser restart if lessons(definitely) or reviews(possibly?) are unavailable. (Win7/FF17. Problem doesn't exist(?) in Mint/FF19)
+* Wont descend from review mode when reviews are done, if lessons are or have ever been available. How did I screw this up so badly
+* Small icon doesn't match other statusbar objects.
+
+#DON'T USE THIS FORK.
