@@ -116,11 +116,19 @@ var Suppon_Nabe = {
           // If the request returns an error, display it and change
           // to the bad icon.
           for (var i = 0; i < 2; i++){
-            sender.button[i].className = "bad_button"+i;
+            try {
+              sender.button[i].className = "bad_button"+i;
+            } catch (e) {
+              Components.utils.reportError(e);
+            }
           }
           sender.state = data.error.message;
           for (var i = 0; i < 2; i++){
-            sender.button[i].tooltipText = sender.state;
+            try {
+              sender.button[i].tooltipText = sender.state;
+            } catch (e) {
+              Components.utils.reportError(e);
+            }
           }
         } else {
           if (data.requested_information.reviews_available > 0) {
@@ -128,8 +136,12 @@ var Suppon_Nabe = {
             // the timer based on the user's set interval.
             sender.state = "Reviews available!";
             for (var i = 0; i < 2; i++){
-              sender.button[i].tooltipText = sender.state;
-              sender.button[i].className = "review_button"+i;
+              try {
+                sender.button[i].tooltipText = sender.state;
+                sender.button[i].className = "review_button"+i;
+              } catch (e) {
+                Components.utils.reportError(e);
+              }
             }
             sender.timer = window.setTimeout(
               function() {sender.update_review_time(sender);},
@@ -139,8 +151,12 @@ var Suppon_Nabe = {
             // the timer based on the user's set interval.
             sender.state = "Lessons available!";
             for (var i = 0; i < 2; i++){
-              sender.button[i].tooltipText = sender.state;
-              sender.button[i].className = "lesson_button"+i;
+              try {
+                sender.button[i].tooltipText = sender.state;
+                sender.button[i].className = "lesson_button"+i;
+              } catch (e) {
+                Components.utils.reportError(e);
+              }
             }
             sender.timer = window.setTimeout(
               function() {sender.update_review_time(sender);},
@@ -150,14 +166,22 @@ var Suppon_Nabe = {
             // Get the date from the request and start a timer to end
             // at that time.
             for (var i = 0; i < 2; i++){
-              sender.button[i].className = "relax_button"+i;
+              try {
+                sender.button[i].className = "relax_button"+i;
+              } catch (e) {
+                Components.utils.reportError(e);
+              }
             }
             var date =
               new Date(data.requested_information.next_review_date*1000);
             sender.state = "Next review: " +
               date.toLocaleTimeString() + " " + date.toLocaleDateString();
             for (var i = 0; i < 2; i++){
-              sender.button[i].tooltipText = sender.state;
+              try {
+                sender.button[i].tooltipText = sender.state;
+              } catch (e) {
+                Components.utils.reportError(e);
+              }
             }
             // Set an alarm for when the next review is up (plus a second).
             sender.timer = window.setTimeout(
@@ -172,9 +196,13 @@ var Suppon_Nabe = {
       // disconnected or their request is denied since it is capped at
       // 100 requests per hour.
       for (var i = 0; i < 2; i++){
-        sender.button[i].tooltipText = errorThrown +
-          "\nLast state: " + sender.state;
-        sender.button[i].className = "bad_button"+i;
+        try {
+          sender.button[i].tooltipText = errorThrown +
+            "\nLast state: " + sender.state;
+          sender.button[i].className = "bad_button"+i;
+        } catch (e) {
+          Components.utils.reportError(e);
+        }
       }
       sender.timer = window.setTimeout(
         function() {sender.update_review_time(sender);}, sender.check_min);
