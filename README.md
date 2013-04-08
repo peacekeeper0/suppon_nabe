@@ -26,8 +26,6 @@ Licensed under the MIT license. See the LICENSE file for more details.
 
 ####BUGs:
 
-* Sticks in init mode after a (post-firstrun) browser restart if lessons(definitely) or reviews(possibly?) are unavailable. (Win7/FF17. Problem doesn't exist(?) in Mint/FF19)
-* Wont descend from review mode when reviews are done, if lessons are or have ever been available. How did I screw this up so badly
+* <strike>Sticks in init mode after a (post-firstrun) browser restart if lessons(definitely) or reviews(possibly?) are unavailable. (Win7/FF17. Problem doesn't exist(?) in Mint/FF19)</strike> Sticks in init mode if you remove the Main button and restart Firefox.
+* <strike>Wont descend from review mode when reviews are done, if lessons are or have ever been available.</strike> Can't reproduce. I clearly don't know what I am doing, please help me.
 * Small icon doesn't match other statusbar objects.
-
-#DON'T USE THIS FORK.
