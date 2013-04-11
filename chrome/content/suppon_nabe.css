@@ -7,6 +7,9 @@
 .bad_button0 {
   list-style-image: url("chrome://suppon_nabe/content/bad.png");
 }
+toolbar[iconsize="small"] .bad_button0 {
+  list-style-image: url("chrome://suppon_nabe/content/bad_sm.png");
+}
 .bad_button1 {
   list-style-image: url("chrome://suppon_nabe/content/bad_sm.png");
   -moz-appearance: statusbar;
@@ -14,6 +17,9 @@
 
 .review_button0 {
   list-style-image: url("chrome://suppon_nabe/content/rvw.png");
+}
+toolbar[iconsize="small"] .review_button0 {
+  list-style-image: url("chrome://suppon_nabe/content/rvw_sm.png");
 }
 .review_button1 {
   list-style-image: url("chrome://suppon_nabe/content/rvw_sm.png");
@@ -23,6 +29,9 @@
 .lesson_button0 {
   list-style-image: url("chrome://suppon_nabe/content/lsn.png");
 }
+toolbar[iconsize="small"] .lesson_button0 {
+  list-style-image: url("chrome://suppon_nabe/content/lsn_sm.png");
+}
 .lesson_button1 {
   list-style-image: url("chrome://suppon_nabe/content/lsn_sm.png");
   -moz-appearance: statusbar;
@@ -31,7 +40,10 @@
 .relax_button0 {
   list-style-image: url("chrome://suppon_nabe/content/rlx.png");
 }
+toolbar[iconsize="small"] .relax_button0 {
+  list-style-image: url("chrome://suppon_nabe/content/rlx_sm.png");
+}
 .relax_button1 {
   list-style-image: url("chrome://suppon_nabe/content/rlx_sm.png");
-  -moz-appearance: statusbar; /* wrong choice, try again */
+  -moz-appearance: statusbar;
 }
