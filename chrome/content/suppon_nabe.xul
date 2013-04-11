@@ -1,45 +1,42 @@
 <?xml version="1.0"?>
 <!-- Copyright (c) 2013 Bonnie Leach
      Licensed under the MIT License.
-     http://www.opensource.org/licenses/mit-license.php 
+     http://www.opensource.org/licenses/mit-license.php
 
      Overlay to include icon on navigation toolbar. -->
 
 <?xml-stylesheet type="text/css"
   href="chrome://suppon_nabe/content/suppon_nabe.css"?>
-<overlay id="sn_overlay" 
+<overlay id="sn_overlay"
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script src="jquery.js" />
-  <script type="application/javascript" 
+  <script type="application/javascript"
     src="chrome://suppon_nabe/content/suppon_nabe.js" />
-	
+
   <toolbarpalette id="BrowserToolbarPalette">
     <toolbarbutton id="sn_button"/>
-    <toolbarbutton id="sn_button_16"/>
+    <toolbarbutton id="sn_button_sb"/>
   </toolbarpalette>
-  
-  <toolbarbutton id="sn_button" tooltiptext="You need to restart Firefox :(" 
+
+  <toolbarbutton id="sn_button" tooltiptext="You need to restart Firefox :("
     label="Suppon Nabe"
-    oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');" 
+    oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');"
   />
-  <!-- TODO: below should probably be type="menu" to match behaviour w/other
-  oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');">
-	statusbar buttons -->
-  <toolbarbutton id="sn_button_16" tooltiptext="You need to restart Firefox :(" 
-  label="Suppon Nabe (StatusBar)"
+  <toolbarbutton id="sn_button_sb" tooltiptext="You need to restart Firefox :("
+  label="Suppon Nabe (Status Bar)"
   type="menu">
     <menupopup>
 	  <menuitem
-	    id="sn_menu_label"
-		label="0 Reviews / 0 Lessons"
-		oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard'); 
-			event.stopPropagation();"
-	  />
-	  <menuitem
-	    id="sn_menu_prefs"
-		label="Preferences (dummy)"
-		oncommand="gBrowser.loadURI('about:addons'); 
-			event.stopPropagation();"
+        id="sn_menu_label"
+        label="init"
+        oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');"
+      />
+      <menuitem
+        id="sn_menu_prefs"
+        label="Preferences"
+        oncommand="window.openDialog(
+          'chrome://suppon_nabe/content/options.xul', 'Suppon Nabe',
+          'chrome,titlebar,toolbar,centerscreen,modal');"
 	  />
     </menupopup>
   </toolbarbutton>
