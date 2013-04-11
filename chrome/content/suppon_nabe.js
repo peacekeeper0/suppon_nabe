@@ -17,6 +17,9 @@ var Suppon_Nabe = {
   api_key: null,
   check_min: null,
   button: [null, null],
+  menulabel: null,
+  menutext: "uh oh",
+  counts: [0,0],
   timer: null,
   state: null,
 
@@ -35,14 +38,15 @@ var Suppon_Nabe = {
       this.prefs.setBoolPref("firstrun", false);
 
       this.add_button("nav-bar", "sn_button");
-      this.add_button("addon-bar", "sn_button_16");
+      this.add_button("addon-bar", "sn_button_sb");
 
       //TODO: prompt for API key
     }
 
     // Collect needed references such as the button and preferences.
     this.button[0] = document.getElementById("sn_button");
-    this.button[1] = document.getElementById("sn_button_16");
+    this.button[1] = document.getElementById("sn_button_sb");
+	this.menulabel = document.getElementById("sn_menu_label");
     this.check_min = this.prefs.getIntPref("check_min");
     if (typeof this.check_min === "undefined" || this.check_min === null ||
         this.check_min < 1) {
@@ -146,6 +150,7 @@ var Suppon_Nabe = {
             sender.timer = window.setTimeout(
               function() {sender.update_review_time(sender);},
               sender.check_min);
+
           } else if (data.requested_information.lessons_available > 0) {
             // If there are lessons available, change as much and start
             // the timer based on the user's set interval.
@@ -161,6 +166,7 @@ var Suppon_Nabe = {
             sender.timer = window.setTimeout(
               function() {sender.update_review_time(sender);},
               sender.check_min);
+
           } else {
             // If there are no reviews or lessons, go into relax mode.
             // Get the date from the request and start a timer to end
@@ -188,7 +194,19 @@ var Suppon_Nabe = {
               function() {sender.update_review_time(sender);},
               (data.requested_information.next_review_date * 1000) -
               new Date().getTime() + 1000);
-    }}})
+
+          }
+		  //Update the counter in the context menu
+		  try {
+		  sender.update_menu(
+			data.requested_information.reviews_available,
+			data.requested_information.lessons_available,
+			data.requested_information.next_review_date
+		  );
+		  } catch (e){
+		    Components.utils.reportError(e);
+		  }
+	}})
     .fail(function(jqXHR, textStatus, errorThrown) {
       // If the JSON request fails, put the error in the tooltip but
       // also the last known state. This means a person will know what
@@ -207,6 +225,21 @@ var Suppon_Nabe = {
       sender.timer = window.setTimeout(
         function() {sender.update_review_time(sender);}, sender.check_min);
   });},
+
+  update_menu: function (rev, les, next){
+    this.menutext = "0 Reviews | 0 Lessons";
+
+    this.counts[0] = rev;
+    this.counts[1] = les;
+    this.menutext = this.menutext.replace(/\d+ Rev/, this.counts[0]+" Rev");
+    this.menutext = this.menutext.replace(/\d+ Les/, this.counts[1]+" Les");
+
+	if (this.counts[0] === 0 && this.counts[1] === 0){
+	  this.menutext = next;
+	}
+
+    this.menulabel.setAttribute("label", this.menutext);
+  },
 
   //adapted from https://developer.mozilla.org/en-US/docs/Code_snippets/Toolbar
   add_button: function (target, button){
