@@ -23,9 +23,24 @@
     oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');" 
   />
   <!-- TODO: below should probably be type="menu" to match behaviour w/other
+  oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');">
 	statusbar buttons -->
   <toolbarbutton id="sn_button_16" tooltiptext="You need to restart Firefox :(" 
-    label="Suppon Nabe (Small)"
-    oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');" 
-  />
+  label="Suppon Nabe (StatusBar)"
+  type="menu">
+    <menupopup>
+	  <menuitem
+	    id="sn_menu_label"
+		label="0 Reviews / 0 Lessons"
+		oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard'); 
+			event.stopPropagation();"
+	  />
+	  <menuitem
+	    id="sn_menu_prefs"
+		label="Preferences (dummy)"
+		oncommand="gBrowser.loadURI('about:addons'); 
+			event.stopPropagation();"
+	  />
+    </menupopup>
+  </toolbarbutton>
 </overlay>
