@@ -46,7 +46,7 @@ var Suppon_Nabe = {
     // Collect needed references such as the button and preferences.
     this.button[0] = document.getElementById("sn_button");
     this.button[1] = document.getElementById("sn_button_sb");
-	this.menulabel = document.getElementById("sn_menu_label");
+    this.menulabel = document.getElementById("sn_menu_label");
     this.check_min = this.prefs.getIntPref("check_min");
     if (typeof this.check_min === "undefined" || this.check_min === null ||
         this.check_min < 1) {
@@ -196,17 +196,17 @@ var Suppon_Nabe = {
               new Date().getTime() + 1000);
 
           }
-		  //Update the counter in the context menu
-		  try {
-		  sender.update_menu(
-			data.requested_information.reviews_available,
-			data.requested_information.lessons_available,
-			data.requested_information.next_review_date
-		  );
-		  } catch (e){
-		    Components.utils.reportError(e);
-		  }
-	}})
+          //Update the counter in the context menu
+          try {
+          sender.update_menu(
+            data.requested_information.reviews_available,
+            data.requested_information.lessons_available,
+            data.requested_information.next_review_date
+          );
+          } catch (e){
+            Components.utils.reportError(e);
+          }
+    }})
     .fail(function(jqXHR, textStatus, errorThrown) {
       // If the JSON request fails, put the error in the tooltip but
       // also the last known state. This means a person will know what
@@ -227,18 +227,21 @@ var Suppon_Nabe = {
   });},
 
   update_menu: function (rev, les, next){
+    //reset the default string
     this.menutext = "0 Reviews | 0 Lessons";
 
+    //try to apply the latest review/lesson counts,
     this.counts[0] = rev;
     this.counts[1] = les;
     this.menutext = this.menutext.replace(/\d+ Rev/, this.counts[0]+" Rev");
     this.menutext = this.menutext.replace(/\d+ Les/, this.counts[1]+" Les");
 
-	if (this.counts[0] === 0 && this.counts[1] === 0){
+    //but if they don't exist, just update the time instead
+    if (this.counts[0] === 0 && this.counts[1] === 0){
       var date = new Date(next*1000);
       this.menutext = "Next review: " + date.toLocaleTimeString() + 
-	    " " + date.toLocaleDateString();
-	}
+        " " + date.toLocaleDateString();
+    }
 
     this.menulabel.setAttribute("label", this.menutext);
   },
