@@ -235,7 +235,9 @@ var Suppon_Nabe = {
     this.menutext = this.menutext.replace(/\d+ Les/, this.counts[1]+" Les");
 
 	if (this.counts[0] === 0 && this.counts[1] === 0){
-	  this.menutext = next;
+      var date = new Date(next*1000);
+      this.menutext = "Next review: " + date.toLocaleTimeString() + 
+	    " " + date.toLocaleDateString();
 	}
 
     this.menulabel.setAttribute("label", this.menutext);
