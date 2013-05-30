@@ -16,6 +16,10 @@ Licensed under the MIT license. See the LICENSE file for more details.
 
 ## Changelog
 
+### 0.1.2 - 30/05/2013
+
+* Updated to jquery 2.0.2 min.
+
 ### 0.1.1 - 02/02/2013
 
 * Now adding the button to the customize toolbar instead of nav.

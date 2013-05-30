@@ -9,7 +9,7 @@
   href="chrome://suppon_nabe/content/suppon_nabe.css"?>
 <overlay id="sn_overlay" 
   xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script type="application/javascript" src="chrome://suppon_nabe/content/jquery-1.9.1.min.js" />
+  <script type="application/javascript" src="chrome://suppon_nabe/content/jquery-2.0.2.min.js" />
   <script type="application/javascript" 
     src="chrome://suppon_nabe/content/suppon_nabe.js" />
   <toolbarpalette id="BrowserToolbarPalette">
