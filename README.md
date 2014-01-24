@@ -2,7 +2,7 @@ A Firefox extension for use with WaniKani.com.
 
 ## License
 
-Copyright © 2013 Bonnie Leach
+Copyright © 2014 Bonnie Leach
 
 Licensed under the MIT license. See the LICENSE file for more details.
 
@@ -17,9 +17,28 @@ Licensed under the MIT license. See the LICENSE file for more details.
 
 ## Changelog
 
-### 0.1.2 - 30/05/2013
+### 0.3.2 - 23/01/2014
+
+* Switched to use SSL.
+
+### 0.3.1 - 30/05/2013
 
 * Updated to jquery 2.0.2 min.
+
+### 0.3 - 10/04/2013
+
+* Main icon now resizes for small icons mode / other toolbars.
+* Secondary icon replaced with statusbar button; prefs menu reachable through popup menu.
+
+### 0.2.1 - 07/04/2013
+
+* Bugfix
+
+### 0.2 - 19/03/2013
+
+* Added small icon.
+* Installs both icons to toolbars on first run.
+* No longer requires a double restart to install/work.
 
 ### 0.1.1 - 02/02/2013
 
@@ -30,16 +49,3 @@ Licensed under the MIT license. See the LICENSE file for more details.
 ### 0.1 - 27/01/2013
 
 * Initial release.
-
-### v0.2p - 19/03/2013
-
-* Added small icon.
-* Installs both icons to toolbars on first run.
-* No longer requires a double restart to install/work.
-
-### v0.2.1p - 07/04/2013
-* Bugfix.
-
-### v0.3p - 10/04/2013
-* Main icon now resizes for small icons mode / other toolbars.
-* Secondary icon replaced with statusbar button; prefs menu reachable through popup menu.

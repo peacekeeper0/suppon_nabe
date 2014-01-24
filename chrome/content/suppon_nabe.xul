@@ -20,7 +20,7 @@
 
   <toolbarbutton id="sn_button" tooltiptext="You need to restart Firefox :("
     label="Suppon Nabe"
-    oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');"
+    oncommand="gBrowser.loadURI('https://www.wanikani.com/dashboard');"
   />
   <toolbarbutton id="sn_button_sb" tooltiptext="You need to restart Firefox :("
   label="Suppon Nabe (Status Bar)"
@@ -29,7 +29,7 @@
 	  <menuitem
         id="sn_menu_label"
         label="init"
-        oncommand="gBrowser.loadURI('http://www.wanikani.com/dashboard');"
+        oncommand="gBrowser.loadURI('https://www.wanikani.com/dashboard');"
       />
       <menuitem
         id="sn_menu_prefs"

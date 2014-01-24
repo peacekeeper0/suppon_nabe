@@ -16,7 +16,7 @@
  */
 
 var Suppon_Nabe = {
-  api_url: "http://www.wanikani.com/api/v1.1/user/",
+  api_url: "https://www.wanikani.com/api/v1.1/user/",
   prefs: null,
   api_key: null,
   check_min: null,
